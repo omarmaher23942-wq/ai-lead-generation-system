@@ -6,7 +6,17 @@ app = FastAPI()
 
 @app.get("/", response_class=HTMLResponse)
 def dashboard():
-    init_db()
+   init_db()
+
+# لو الـ database فاضية نضيف بيانات تجريبية
+   from database.db import save_lead
+   if not get_all_leads():
+    save_lead("Nolan Barger", "nolan@webfx.com", "888-601-5359", "https://www.webfx.com", "Director of Innovation at WebFX")
+    save_lead("Jane Carlson", "jane@webfx.com", "888-601-5359", "https://www.webfx.com", "Sales Manager at WebFX")
+    save_lead("Matthew Goulart", "matthew@ignitedigital.com", "1-800-831-6998", "https://ignitedigital.com", "Founder at Ignite Digital")
+    save_lead("Aaron Whittaker", "aaron@thriveagency.com", "866-908-4748", "https://thriveagency.com", "VP of Marketing at Thrive Agency")
+    save_lead("Frank Fornaris", "frank@straightnorth.com", "N/A", "https://www.straightnorth.com", "President at Straight North")
+
     leads = get_all_leads()
     
     rows = ""
