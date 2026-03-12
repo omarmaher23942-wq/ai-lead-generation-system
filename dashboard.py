@@ -19,7 +19,10 @@ MARKETING_AGENCIES = [
 @app.on_event("startup")
 def startup():
     init_db()
-    if not get_all_leads():
+    leads = get_all_leads()
+    print(f"🔥 Startup: found {len(leads)} leads in DB")
+    if not leads:
+        print("🌱 Seeding initial data...")
         save_lead("Nolan Barger","nolan@webfx.com","888-601-5359","https://www.webfx.com","Director of Innovation at WebFX")
         save_lead("Jane Carlson","jane@webfx.com","888-601-5359","https://www.webfx.com","Sales Manager at WebFX")
         save_lead("Matthew Goulart","matthew@ignitedigital.com","1-800-831-6998","https://ignitedigital.com","Founder at Ignite Digital")
@@ -28,6 +31,7 @@ def startup():
         save_lead("Chad De Lisle","chad@disruptiveadvertising.com","N/A","https://disruptiveadvertising.com","VP of Marketing at Disruptive Advertising")
         save_lead("Mai Nguyen","mnguyen@disruptiveadvertising.com","N/A","https://disruptiveadvertising.com","SEO Strategist at Disruptive Advertising")
         save_lead("Brandon George","brandon@thriveagency.com","866-908-4748","https://thriveagency.com","Content Director at Thrive Agency")
+        print(f"✅ Seeded {len(get_all_leads())} leads")
 
 @app.get("/", response_class=HTMLResponse)
 def index():
